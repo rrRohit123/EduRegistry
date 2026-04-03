@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduRegistry | Edit</title>
+    <style>
+        :root {
+            --primary: #556b2f;
+            --primary-hover: #3d4e21;
+            --bg-body: #f7f8f3;
+            --text-main: #1f2937;
+            --card-bg: #ffffff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-body); display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+
+        .card {
+            background: var(--card-bg); border-radius: 24px; padding: 2.5rem; width: 100%; max-width: 450px;
+            box-shadow: 0 20px 25px -5px rgba(85, 107, 47, 0.1); border: 1px solid #ccd5be;
+        }
+
+        .back-link { font-size: 14px; font-weight: 600; color: var(--primary); text-decoration: none; margin-bottom: 1.5rem; display: block; }
+        h2 { font-size: 22px; font-weight: 800; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px; }
+        h2::before { content: ''; width: 6px; height: 22px; background: var(--primary); border-radius: 10px; }
+
+        label { font-size: 13px; font-weight: 700; display: block; margin-bottom: 6px; margin-left: 4px; }
+        input { width: 100%; padding: 12px 16px; border: 2px solid #f3f4f6; border-radius: 12px; font-size: 15px; background: #f9faf7; margin-bottom: 1.25rem; outline: none; }
+        input:focus { border-color: var(--primary); background: #fff; }
+
+        .actions-row { display: flex; gap: 12px; margin-top: 1rem; }
+        .btn { flex: 1; padding: 14px; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; text-align: center; text-decoration: none; border: none; }
+        .btn-save { background: var(--primary); color: #fff; }
+        .btn-save:hover { background: var(--primary-hover); transform: translateY(-1px); }
+        .btn-cancel { background: #f3f4f6; color: #4b5563; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <a href="{% url 'home' %}" class="back-link">← Back to Dashboard</a>
+        <h2>Edit Student</h2>
+        <form method="post">
+            {% csrf_token %}
+            <label>Full Name</label>
+            <input type="text" name="name" value="{{ student.name }}" required>
+            <label>Email Address</label>
+            <input type="email" name="email" value="{{ student.email }}" required>
+            <label>Age</label>
+            <input type="number" name="age" value="{{ student.age }}" required>
+            <label>Course</label>
+            <input type="text" name="course" value="{{ student.course }}" required>
+            <div class="actions-row">
+                <a href="{% url 'home' %}" class="btn btn-cancel">Cancel</a>
+                <button type="submit" class="btn btn-save">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
